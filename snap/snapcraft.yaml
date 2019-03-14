@@ -21,6 +21,7 @@
 # are placeholders text meant to be replaced by appropriate content
 
 name: my-awesome-app
+title: My Awesome App.
 summary: Single-line elevator pitch for your amazing snap under 79 chars.
 description: |
   This is my-awesome-app's description. You have a paragraph or two to tell
@@ -35,19 +36,28 @@ description: |
 # Only PNG or SVG image is supported, dimension must be greater than 256x256px
 icon: snap/gui/my-awesome-app.png
 
+# The license of this application, in SPDX format
+# NOTE: Currently only supports SPDX 2.1 license expressions, as described in Appendix IV of
+# https://spdx.org/spdx-specification-21-web-version
+# Supported expressions:
+# https://github.com/snapcore/snapd/blob/HEAD/spdx/licenses.go
+#license:
+
 # Version string just for humans, typically '1.2+git' or '1.3.2'
 # The wrapping single quotes are often required to avoid the version string
 # being accidentally interpreted as a YAML non-string(like '1', '1.2').
 # http://yaml.org/type
 # https://arp242.net/weblog/yaml_probably_not_so_great_after_all.html#surprising-behaviour
-version: determined-by-version-script
+# NOTE: This key is mutual exclusive with the `adopt-info` key
+#version: determined-by-version-script
 
-# (OPTIONAL) The version string can also be dynamically determined via scripting
-# , in this case the value of the `version` key will be ignored (but the key is
-# still required).
-# NOTE: The resulting version string cannot be longer than 32 characters
-version-script: ./snap/local/build-utilities/set-snap-version.bash
-#version-script: git -C parts/my-app-part/src describe --always --dirty --tags
+# Extract metadata from snap part
+# https://forum.snapcraft.io/t/extracting-information-from-sources-in-snapcraft-parts/4642
+adopt-info: my-app-part
+
+# Base runtime
+# The common runtime for the snap to run on, or `bare` for static linked applications
+base: core18
 
 # Security confinement
 # Use `devmode` to getting started
@@ -94,28 +104,69 @@ parts:
     stage:
     - -bin/README.*
 
-  # Remote part for fixing the glibc locales(and gnu gettext I18N support)
+  # Programs to modify the behavior of each step of the snapcraft lifecycles
+  scriptlets:
+    source: snap/local/scriptlets
+    plugin: dump
+    organize:
+      '*': assets/scriptlets/
+    stage:
+    - assets/scriptlets
+
+  # Stage snap for fixing the glibc locales(and gnu gettext I18N support)
   # This part is only required for non GUI apps that don't uses the desktop-launch launchers
   #locales-launch:
+    #plugin: nil
+    #stage-snaps:
+    #- locales-launch
+    #stage-packages:
+    # For localedef(1)
+    #- libc-bin
 
-  # Remote part for recording the exact revision for each part during building
-  parts-meta-info:
+    # For locale data used by localedef(1)
+    #- locales
+
+    # All pre-generated locale data
+    # DISABLED: Lots of duplicate data will be included in snap when this is staged, unless the target machine has no resource to generate them in runtime otherwise not using it
+    #
+    #   Lack of compiled locales breaks gettext based localisation - snapcraft - snapcraft.io
+    #   https://forum.snapcraft.io/t/lack-of-compiled-locales-breaks-gettext-based-localisation/3758
+    #
+    #- locales-all
 
   # Remote part for support of various desktop technologies
   # Refer: https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml
-  desktop-gtk3: # for zenity
+  desktop-gnome-platform:
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-depth: 1
+    source-subdir: gtk
+
+    plugin: make
+    build-packages:
+    - build-essential
+    - libgtk-3-dev
+    override-build: |
+      snapcraftctl build
+      mkdir -pv $SNAPCRAFT_PART_INSTALL/gnome-platform
 
   # Optional auxiliary part for displaying simple dialogs for better user experience, powered by Zenity
   # https://forum.snapcraft.io/t/the-zenity-remote-part/8793
   zenity:
-    # This part or part recipe is needed until LP#1766878 is fixed
-    #
-    # Bug #1766878 “$SNAPCRAFT_PROJECT_NAME used in a remote part expands to wrong value” : Bugs : Snapcraft
-    # https://bugs.launchpad.net/snapcraft/+bug/1766878
+    source: https://gitlab.gnome.org/GNOME/zenity.git
+    source-tag: 3.28.1
+    source-depth: 1
+    plugin: autotools
     configflags:
     - --datarootdir=/snap/$SNAPCRAFT_PROJECT_NAME/current/share
     - --disable-libnotify
     - --disable-webkitgtk
+    build-packages:
+    - gnome-pkg-tools
+    - gnome-common
+    - yelp-tools
+    - gettext
+    - libglib2.0-dev
+    - libgtk-3-dev
     organize:
       snap/$SNAPCRAFT_PROJECT_NAME/current: /
 
@@ -124,12 +175,23 @@ parts:
     # for patch-desktop-entries.*
     - patching
 
-    source: snap/local/empty
+    # for override-pull script
+    - scriptlets
+
+    source: .
     #source-type:
     #source-tag:
     #source-depth:
+    override-pull: |
+      set -o nounset
 
-    plugin: nil
+      "${SNAPCRAFT_STAGE}"/assets/scriptlets/main-pull
+
+    plugin: dump
+    organize:
+      my-awesome-app: bin/
+    stage:
+    - bin/*
 
     override-prime: |
       set \
@@ -138,7 +200,7 @@ parts:
 
       snapcraftctl prime
 
-      ./assets/patching/patch-desktop-entries.bash
+      "${SNAPCRAFT_STAGE}"/assets/patching/patch-desktop-entries.bash
 
 # Apps that are exposed by the snap package
 # If the _app_name_ is identical with the _snap_name_ it can be directly run
@@ -146,18 +208,18 @@ parts:
 # via `_snap_name_._app_name_` or `snap run _snap_name_._app_name_`
 apps:
   my-app-name:
-    # The command to run the application, the base command should be an *relative path* to an executable file rooted from the `prime` directory (for `classic` confinement compatiblity, where command search PATHs under $SNAP isn't set for library compatiblity reasons).  The arguments are usually other launchers' *absolute path* rooted from the $SNAP environment variable that are *stacked over* previous ones to consolidate their runtime environment modifications.
+    # The adapter to set up runtime environment at the launch of the snap
+    # NOTE: The `command-chain` property is only supported by the `full` adapter
+    adapter: full
+
+    # An *relative path* to an executable file root from the `prime` directory to be executed, and its command-line arguments
     # NOTE: The right angle bracket at the beginning of the value of the `command` keyword starts a YAML folded style block scalar, refer the following spec document for more info: http://yaml.org/spec/1.2/spec.html#id2796251
-    command: >
-      bin/desktop-launch
-      "${SNAP}"/bin/my-awesome-app-launch
-      "${SNAP}"/bin/zenity
-        --info
-        --ok-label='Got it'
-        --title='My Awesome App'
-        --text='This is a demonstrative application for Snapcrafters Template Plus.\nIt indicates that the snapped application has been launched properly.'
-        --window-icon="${SNAP}"/snap/gui/my-awesome-app.png
-        --width=600
+    command: bin/my-awesome-app
+
+    # The commands that are run, in order, before running the one specified by the `command` key
+    command-chain:
+    - bin/desktop-launch
+    - bin/my-awesome-app-launch
 
     # If the providing part of the app. has a desktop entry, specify its path relative to the `prime` directory.
     # If the packaging target doesn't provide a desktop entry, ignore the `desktop` key and implement a desktop entry in `/snap/gui`
@@ -176,6 +238,24 @@ plugs:
   x11:
   unity7:
   wayland:
+
+  # GNOME and Gtk runtime via content sharing
+  gnome-3-28-1804:
+    interface: content
+    target: $SNAP/gnome-platform
+    default-provider: gnome-3-28-1804
+  gtk-3-themes:
+    interface: content
+    target: $SNAP/data-dir/themes
+    default-provider: gtk-common-themes
+  icon-themes:
+    interface: content
+    target: $SNAP/data-dir/icons
+    default-provider: gtk-common-themes
+  sound-themes:
+    interface: content
+    target: $SNAP/data-dir/sounds
+    default-provider: gtk-common-themes
 
   # Storage access
   #home:

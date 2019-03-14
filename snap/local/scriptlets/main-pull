@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# Pull the source of the main part and set the snap's version based on it
+# 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com> © 2018
+
+set \
+    -o errexit \
+    -o errtrace \
+    -o nounset \
+    -o pipefail
+
+init(){
+    local \
+        upstream_version \
+        packaging_revision \
+        some_place_under_the_project_repo \
+        snap_version_string
+
+    snapcraftctl pull
+
+    if ! git describe &>/dev/null; then
+        upstream_version=unknown
+    else
+        upstream_version="$(
+            git \
+                describe \
+                --always \
+                --dirty=-d \
+                --tags \
+            | sed s/^v//
+        )"
+    fi
+
+    # WORKAROUND:
+    #   Allow fetching project revision in multipass build
+    #   environment, which uses out-of-tree build and packaging
+    #   source tree repo location can't be determined via environment
+    #   Unable to determine project version info in multipass build environment - snapcraft - snapcraft.io
+    #   https://forum.snapcraft.io/t/unable-to-determine-project-version-info-in-multipass-build-environment/10416
+    if test -d /root/project; then
+        some_place_under_the_project_repo=/root/project
+    else
+        some_place_under_the_project_repo=..
+    fi
+
+    packaging_revision="$(
+        git \
+            -C "${some_place_under_the_project_repo}" \
+            describe \
+            --abbrev=4 \
+            --always \
+            --match nothing \
+            --dirty=-d
+    )"
+
+    snap_version_string="${upstream_version}+pkg-${packaging_revision}"
+
+    printf -- \
+        'main-pull: Setting snap version to "%s".\n' \
+        "${snap_version_string}"
+    snapcraftctl set-version \
+        "${snap_version_string}"
+
+    exit 0
+}
+
+init "${@}"

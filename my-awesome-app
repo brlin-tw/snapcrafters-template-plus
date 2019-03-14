@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# A demonstration app for Snapcraft Template Plus, essentially only show a friendly message
+# 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com> © 2019
+
+set \
+    -o errexit \
+    -o errtrace \
+    -o nounset \
+    -o pipefail
+
+init(){
+    zenity \
+        --info \
+        --ok-label='Got it' \
+        --title='My Awesome App' \
+        --text='This is a demonstrative application for Snapcrafters Template Plus.\nIt indicates that the snapped application has been launched properly.' \
+        --window-icon="${SNAP}"/snap/gui/my-awesome-app.png \
+        --width=600
+    exit $?
+}
+
+init "${@}"
