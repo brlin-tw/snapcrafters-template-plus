@@ -50,7 +50,7 @@ icon: snap/gui/my-awesome-app.png
 # NOTE: This key is mutual exclusive with the `adopt-info` key
 #version: determined-by-version-script
 
-# Extract metadata from snap part
+# Extract metadata from the main snap part
 # https://forum.snapcraft.io/t/extracting-information-from-sources-in-snapcraft-parts/4642
 adopt-info: my-app-part
 
