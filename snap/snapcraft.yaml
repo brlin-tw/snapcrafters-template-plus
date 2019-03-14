@@ -94,15 +94,6 @@ parts:
     stage:
     - -bin/README.*
 
-  # Helper programs that can be called at snap runtime
-  helpers:
-    source: snap/local/helpers
-    plugin: dump
-    organize:
-      '*': bin/
-    stage:
-    - -bin/README.*
-
   # Programs to modify the behavior of each step of the snapcraft lifecycles
   scriptlets:
     source: snap/local/scriptlets
