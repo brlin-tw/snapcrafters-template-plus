@@ -61,29 +61,6 @@ confinement: strict
 # snaps can be promoted to `candidate` and `stable` channels
 grade: stable
 
-# Refer the following documentation for asserting interface plugs and slots in a security confined snap:
-# Interface management - doc - snapcraft.io
-# https://docs.snapcraft.io/interface-management/6154
-# Supported interfaces - doc - snapcraft.io
-# https://docs.snapcraft.io/supported-interfaces/7744
-# Non-A/C: Non-autoconnect interface
-plugs:
-  # For snaps with a graphical user interface:
-  desktop:
-  desktop-legacy:
-  x11:
-  unity7:
-  wayland:
-
-  # Storage access
-  #home:
-  #removable-media: # Non-A/C
-
-  # Network access
-  #network:
-
-#slots:
-
 # Run `snapcraft help sources` for supported keywords on pulling a part's source ingredients
 # Run `snapcraft plugins` for supported build helper plugins
 # Run `snapcraft help plugins` for supported keywords on building a part
@@ -193,3 +170,26 @@ apps:
     # If the providing part of the app. has a desktop entry, specify its path relative to the `prime` directory.
     # If the packaging target doesn't provide a desktop entry, ignore the `desktop` key and implement a desktop entry in `/snap/gui`
     #desktop: share/applications/my-app-name.desktop
+
+# Refer the following documentation for asserting interface plugs and slots in a security confined snap:
+# Interface management - doc - snapcraft.io
+# https://docs.snapcraft.io/interface-management/6154
+# Supported interfaces - doc - snapcraft.io
+# https://docs.snapcraft.io/supported-interfaces/7744
+# Non-A/C: Non-autoconnect interface
+plugs:
+  # For snaps with a graphical user interface:
+  desktop:
+  desktop-legacy:
+  x11:
+  unity7:
+  wayland:
+
+  # Storage access
+  #home:
+  #removable-media: # Non-A/C
+
+  # Network access
+  #network:
+
+#slots:
