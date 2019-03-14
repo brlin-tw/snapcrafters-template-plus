@@ -67,12 +67,12 @@ grade: stable
 # For `override-*` scriptlets used to modify behavior of certain part's lifecycle phase, check out:
 # https://docs.snapcraft.io/scriptlets/4892
 parts:
-  # Utility programs to help with package building
-  build-utilities:
-    source: snap/local/build-utilities
+  # Files to patch the files in the snap
+  patching:
+    source: snap/local/patching
     plugin: dump
     organize:
-      '*': assets/build-utilities/
+      '*': assets/patching/
     prime:
     - -*
 
@@ -84,15 +84,6 @@ parts:
       '*': bin/
     stage:
     - -bin/README.*
-
-  # Program patches to solve issues that can't be solved by tweaking in runtime
-  patches:
-    source: snap/local/patches
-    plugin: dump
-    organize:
-      '*': assets/patches/
-    prime:
-    - -*
 
   # Helper programs that can be called at snap runtime
   helpers:
@@ -131,7 +122,7 @@ parts:
   my-app-part:
     after:
     # for patch-desktop-entries.*
-    - build-utilities
+    - patching
 
     source: snap/local/empty
     #source-type:
@@ -147,7 +138,7 @@ parts:
 
       snapcraftctl stage
 
-      ./assets/build-utilities/patch-desktop-entries.bash
+      ./assets/patching/patch-desktop-entries.bash
 
 # Apps that are exposed by the snap package
 # If the _app_name_ is identical with the _snap_name_ it can be directly run
