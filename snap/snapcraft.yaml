@@ -81,7 +81,7 @@ parts:
     source: snap/local/patching
     plugin: dump
     organize:
-      '*': assets/patching/
+      '*': patching/
     prime:
     - -*
 
@@ -99,7 +99,7 @@ parts:
     source: snap/local/scriptlets
     plugin: dump
     organize:
-      '*': assets/scriptlets/
+      '*': scriptlets/
     stage:
     - assets/scriptlets
 
@@ -175,7 +175,7 @@ parts:
     override-pull: |
       set -o nounset
 
-      "${SNAPCRAFT_STAGE}"/assets/scriptlets/main-pull
+      "${SNAPCRAFT_STAGE}"/scriptlets/main-pull
 
     plugin: dump
     organize:
@@ -190,7 +190,7 @@ parts:
 
       snapcraftctl prime
 
-      "${SNAPCRAFT_STAGE}"/assets/patching/patch-desktop-entries.bash
+      "${SNAPCRAFT_STAGE}"/patching/patch-desktop-entries.bash
 
 # Apps that are exposed by the snap package
 # If the _app_name_ is identical with the _snap_name_ it can be directly run
