@@ -130,7 +130,8 @@ parts:
 
   my-app-part:
     after:
-    - build-utilities # for patch-desktop-entries.*
+    # for patch-desktop-entries.*
+    - build-utilities
 
     source: snap/local/empty
     #source-type:
