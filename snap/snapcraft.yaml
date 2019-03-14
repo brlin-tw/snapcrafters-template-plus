@@ -17,7 +17,7 @@
 # All following comments, including this one, are designed to be stripped
 # before contributing the recipe to the upstream
 
-# my-awesome-app, my-app-name, my-app-command, my-app-launch, my-app-part
+# [Project], my-awesome-app, my-awesome-app-launch
 # are placeholders text meant to be replaced by appropriate content
 name: my-awesome-app
 title: My Awesome App.
@@ -52,7 +52,7 @@ icon: snap/gui/my-awesome-app.png
 
 # Extract metadata from the main snap part
 # https://forum.snapcraft.io/t/extracting-information-from-sources-in-snapcraft-parts/4642
-adopt-info: my-app-part
+adopt-info: my-awesome-app
 
 # Base runtime
 # The common runtime for the snap to run on, or `bare` for static linked applications
@@ -160,7 +160,7 @@ parts:
     organize:
       snap/$SNAPCRAFT_PROJECT_NAME/current: /
 
-  my-app-part:
+  my-awesome-app:
     after:
     # for patch-desktop-entries.*
     - patching
@@ -197,7 +197,7 @@ parts:
 # with `_snap_name_` or `snap run _snap_name_` commands, otherwise it can only be run
 # via `_snap_name_._app_name_` or `snap run _snap_name_._app_name_`
 apps:
-  my-app-name:
+  my-awesome-app:
     # The adapter to set up runtime environment at the launch of the snap
     # NOTE: The `command-chain` property is only supported by the `full` adapter
     adapter: full
@@ -213,7 +213,7 @@ apps:
 
     # If the providing part of the app. has a desktop entry, specify its path relative to the `prime` directory.
     # If the packaging target doesn't provide a desktop entry, ignore the `desktop` key and implement a desktop entry in `/snap/gui`
-    #desktop: share/applications/my-app-name.desktop
+    #desktop: share/applications/my-awesome-app.desktop
 
 # Refer the following documentation for asserting interface plugs and slots in a security confined snap:
 # Interface management - doc - snapcraft.io
