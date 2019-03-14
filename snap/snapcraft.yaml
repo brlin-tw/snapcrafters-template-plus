@@ -19,7 +19,6 @@
 
 # my-awesome-app, my-app-name, my-app-command, my-app-launch, my-app-part
 # are placeholders text meant to be replaced by appropriate content
-
 name: my-awesome-app
 title: My Awesome App.
 summary: Single-line elevator pitch for your amazing snap under 79 chars.
