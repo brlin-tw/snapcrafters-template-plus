@@ -28,6 +28,9 @@ description: |
   we live in tweetspace and your description wants to look good in the snap
   store.
 
+  This is the demonstration app of the Snapcrafters Template Plus:
+  https://github.com/Lin-Buo-Ren/snapcrafters-template-plus
+
 # The path of icon to represent the snap, relative to the source tree directory
 # Only PNG or SVG image is supported, dimension must be greater than 256x256px
 icon: snap/gui/my-awesome-app.png
