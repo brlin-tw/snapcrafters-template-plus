@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Utility script to patch desktop entries in snap, should only be run in the `override-stage` scriptlet
+# Utility script to patch desktop entries in snap, should only be run in the `override-prime` scriptlet
 # 林博仁 © 2018
 
 ## Makes debuggers' life easier - Unofficial Bash Strict Mode
@@ -89,10 +89,10 @@ init(){
 		exit 1
 	fi
 
-	if ! test -v SNAPCRAFT_STAGE \
-		|| test "${PWD}" != "${SNAPCRAFT_STAGE}"; then
+	if ! test -v SNAPCRAFT_PRIME \
+		|| test "${PWD}" != "${SNAPCRAFT_PRIME}"; then
 		printf -- \
-			"%s: Error: This script should be run by \`snapcraft\` in the \`override-stage\` scriptlet.\\n" \
+			"%s: Error: This script should be run by \`snapcraft\` in the \`override-prime\` scriptlet.\\n" \
 			"${RUNTIME_EXECUTABLE_NAME}"
 		exit 1
 	fi
