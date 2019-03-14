@@ -100,8 +100,8 @@ parts:
     plugin: dump
     organize:
       '*': scriptlets/
-    stage:
-    - assets/scriptlets
+    prime:
+    - -*
 
   # Stage snap for fixing the glibc locales(and gnu gettext I18N support)
   # This part is only required for non GUI apps that don't uses the desktop-launch launchers
