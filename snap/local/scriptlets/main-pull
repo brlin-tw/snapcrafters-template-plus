@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Pull the source of the main part and set the snap's version based on it
-# 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com> © 2018
+# 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com> © 2019
 
 set \
     -o errexit \
@@ -10,12 +10,39 @@ set \
 
 init(){
     local \
+        flag_dry_run=false \
         upstream_version \
         packaging_revision \
         some_place_under_the_project_repo \
         snap_version_string
 
-    snapcraftctl pull
+    for commandline_argument in "${@}"; do
+        case "${commandline_argument}" in
+            # Enable execution tracing
+            --debug)
+                set -o xtrace
+            ;;
+            # Don't run snapcraftctl for testing purpose
+            --dry-run)
+                flag_dry_run=true
+            ;;
+            --usage)
+                print_usage
+                exit 0
+            ;;
+            *)
+                printf -- \
+                    'main-pull: Error: Invalid command-line argument.\n' \
+                    >&2
+                print_usage
+                exit 1
+            ;;
+        esac
+    done
+
+    if [ "${flag_dry_run}" = false ]; then
+        snapcraftctl pull
+    fi
 
     if ! git describe &>/dev/null; then
         upstream_version=unknown
@@ -57,10 +84,17 @@ init(){
     printf -- \
         'main-pull: Setting snap version to "%s".\n' \
         "${snap_version_string}"
-    snapcraftctl set-version \
-        "${snap_version_string}"
+    if [ "${flag_dry_run}" = false ]; then
+        snapcraftctl set-version \
+            "${snap_version_string}"
+    fi
 
     exit 0
+}
+
+print_usage(){
+    printf -- 'Usage: main-pull [options] _snap_name_\n'
+    printf -- 'options: [--debug|--dry-run|--help]\n'
 }
 
 init "${@}"
