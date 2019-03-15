@@ -52,7 +52,7 @@ icon: snap/gui/my-awesome-app.png
 
 # Extract metadata from the main snap part
 # https://forum.snapcraft.io/t/extracting-information-from-sources-in-snapcraft-parts/4642
-adopt-info: my-awesome-app
+adopt-info: main
 
 # Base runtime
 # The common runtime for the snap to run on, or `bare` for static linked applications
@@ -160,7 +160,7 @@ parts:
     organize:
       snap/$SNAPCRAFT_PROJECT_NAME/current: /
 
-  my-awesome-app:
+  main:
     after:
     # for patch-desktop-entries.*
     - patching
