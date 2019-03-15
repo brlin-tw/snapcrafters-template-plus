@@ -9,27 +9,27 @@ set \
     -o pipefail
 
 if [ -v 'BASH_SOURCE[0]' ]; then
-	RUNTIME_EXECUTABLE_PATH="$(realpath --strip "${BASH_SOURCE[0]}")"
-	RUNTIME_EXECUTABLE_FILENAME="$(basename "${RUNTIME_EXECUTABLE_PATH}")"
-	RUNTIME_EXECUTABLE_NAME="${RUNTIME_EXECUTABLE_FILENAME%.*}"
-	RUNTIME_EXECUTABLE_DIRECTORY="$(dirname "${RUNTIME_EXECUTABLE_PATH}")"
-	RUNTIME_COMMANDLINE_BASECOMMAND="${0}"
-	# We intentionally leaves these variables for script developers
-	# shellcheck disable=SC2034
-	declare -r \
-		RUNTIME_EXECUTABLE_PATH \
-		RUNTIME_EXECUTABLE_FILENAME \
-		RUNTIME_EXECUTABLE_NAME \
-		RUNTIME_EXECUTABLE_DIRECTORY \
-		RUNTIME_COMMANDLINE_BASECOMMAND
+    RUNTIME_EXECUTABLE_PATH="$(realpath --strip "${BASH_SOURCE[0]}")"
+    RUNTIME_EXECUTABLE_FILENAME="$(basename "${RUNTIME_EXECUTABLE_PATH}")"
+    RUNTIME_EXECUTABLE_NAME="${RUNTIME_EXECUTABLE_FILENAME%.*}"
+    RUNTIME_EXECUTABLE_DIRECTORY="$(dirname "${RUNTIME_EXECUTABLE_PATH}")"
+    RUNTIME_COMMANDLINE_BASECOMMAND="${0}"
+    # We intentionally leaves these variables for script developers
+    # shellcheck disable=SC2034
+    declare -r \
+        RUNTIME_EXECUTABLE_PATH \
+        RUNTIME_EXECUTABLE_FILENAME \
+        RUNTIME_EXECUTABLE_NAME \
+        RUNTIME_EXECUTABLE_DIRECTORY \
+        RUNTIME_COMMANDLINE_BASECOMMAND
 fi
 declare -ar RUNTIME_COMMANDLINE_ARGUMENTS=("${@}")
 
 init(){
-	# HACK: Allow testing the script in-place
-	if ! test -v SNAP; then
-		SNAP="${RUNTIME_EXECUTABLE_DIRECTORY}"
-	fi
+    # HACK: Allow testing the script in-place
+    if ! test -v SNAP; then
+        SNAP="${RUNTIME_EXECUTABLE_DIRECTORY}"
+    fi
 
     zenity \
         --info \
