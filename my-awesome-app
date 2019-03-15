@@ -34,7 +34,7 @@ init(){
     zenity \
         --info \
         --ok-label='Got it!' \
-        --title='My Awesome App' \
+        --title='My Awesome App.' \
         --text='This is a demonstrative application for Snapcrafters Template Plus.\nIt indicates that the snapped application has been launched properly.' \
         --window-icon="${SNAP}"/snap/gui/my-awesome-app.png \
         --width=600
