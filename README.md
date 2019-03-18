@@ -62,19 +62,8 @@ You may generate the unique hash by using the following command in terminal:
 -->
 
 <!-- 
-
-## The Snapcrafters
-| [![Your Name](http://gravatar.com/avatar/bc0bced65e963eb5c3a16cab8b004431/?s=128)](https://github.com/yourname) |
-| :-: |
-| [Your Name](https://github.com/_your_github_id_) |
-
---> 
-
-<!-- Uncomment and modify this when you have upstream contacts
-
-## Upstream
-| [![Upstream Name](http://gravatar.com/avatar/bc0bced65e963eb5c3a16cab8b004431?s=128)](https://github.com/upstreamname) |
-| :-: |
-| [Upstream Name](https://github.com/_upstream_github_id_) |
-
+## Contacts
+| Packager | Upstream |
+| :-: | :-: |
+| [![Packager's avatar](http://gravatar.com/avatar/66a5b84972e73e895d5d68d48b1e1e22/?s=128)<br>Packager's name](mailto:packager.contact) | [![Upstream's avatar](GitHub-Mark.png)<br>Upstream's contact name](mailto:upstream.contact) |
 -->
