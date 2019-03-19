@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Pull the source of the main part and set the snap's version based on it
+# Extract and set the snap's version from the main part
 # 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com> © 2019
 
 set \
@@ -32,17 +32,13 @@ init(){
             ;;
             *)
                 printf -- \
-                    'main-pull: Error: Invalid command-line argument.\n' \
+                    'main-adopt-info: Error: Invalid command-line argument.\n' \
                     >&2
                 print_usage
                 exit 1
             ;;
         esac
     done
-
-    if [ "${flag_dry_run}" = false ]; then
-        snapcraftctl pull
-    fi
 
     if ! git describe &>/dev/null; then
         upstream_version=unknown
@@ -82,7 +78,7 @@ init(){
     snap_version_string="${upstream_version}+pkg-${packaging_revision}"
 
     printf -- \
-        'main-pull: Setting snap version to "%s".\n' \
+        'main-adopt-info: Setting snap version to "%s".\n' \
         "${snap_version_string}"
     if [ "${flag_dry_run}" = false ]; then
         snapcraftctl set-version \
@@ -93,7 +89,7 @@ init(){
 }
 
 print_usage(){
-    printf -- 'Usage: main-pull [options] _snap_name_\n'
+    printf -- 'Usage: main-adopt-info [options] _snap_name_\n'
     printf -- 'options: [--debug|--dry-run|--help]\n'
 }
 
