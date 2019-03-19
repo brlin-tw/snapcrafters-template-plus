@@ -187,7 +187,6 @@ parts:
 
     override-prime: |
       set \
-        -o errexit \
         -o nounset
 
       snapcraftctl prime
