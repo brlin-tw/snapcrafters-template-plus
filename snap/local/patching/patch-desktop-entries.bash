@@ -18,7 +18,10 @@ declare\
 for required_command in \
 	basename \
 	dirname \
-	realpath; do
+	find \
+	realpath \
+	sed \
+	xargs; do
 	if ! command -v "${required_command}" &>/dev/null; then
 		runtime_dependency_checking_result=fail
 
