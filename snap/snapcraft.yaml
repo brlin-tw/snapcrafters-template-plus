@@ -48,7 +48,7 @@ icon: snap/gui/my-awesome-app.png
 # http://yaml.org/type
 # https://arp242.net/weblog/yaml_probably_not_so_great_after_all.html#surprising-behaviour
 # NOTE: This key is mutual exclusive with the `adopt-info` key
-#version: determined-by-version-script
+#version: determined-by-adopt-info
 
 # Extract metadata from the main snap part
 # https://forum.snapcraft.io/t/extracting-information-from-sources-in-snapcraft-parts/4642
