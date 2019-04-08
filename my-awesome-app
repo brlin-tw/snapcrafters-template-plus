@@ -26,9 +26,13 @@ fi
 declare -ar RUNTIME_COMMANDLINE_ARGUMENTS=("${@}")
 
 init(){
+    local icon
+
     # HACK: Allow testing the script in-place
     if ! test -v SNAP; then
-        SNAP="${RUNTIME_EXECUTABLE_DIRECTORY}"
+        icon="${RUNTIME_EXECUTABLE_DIRECTORY}"/snap/gui/my-awesome-app.png
+    else
+        icon="${SNAP}"/meta/gui/my-awesome-app.png
     fi
 
     zenity \
@@ -36,7 +40,7 @@ init(){
         --ok-label='Got it!' \
         --title='My Awesome App.' \
         --text='This is a demonstrative application for Snapcrafters Template Plus.\nIt indicates that the snapped application has been launched properly.' \
-        --window-icon="${SNAP}"/snap/gui/my-awesome-app.png \
+        --window-icon="${icon}" \
         --width=600
     exit $?
 }
