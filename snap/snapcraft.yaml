@@ -139,26 +139,12 @@ parts:
       snapcraftctl build
       mkdir -pv $SNAPCRAFT_PART_INSTALL/gnome-platform
 
-  # Optional auxiliary part for displaying simple dialogs for better user experience, powered by Zenity
-  # https://forum.snapcraft.io/t/the-zenity-remote-part/8793
+  # Integrate custom dialogs in your snap - doc - snapcraft.io
+  # https://forum.snapcraft.io/t/integrate-custom-dialogs-in-your-snap/10825
   zenity:
-    source: https://gitlab.gnome.org/GNOME/zenity.git
-    source-tag: 3.28.1
-    source-depth: 1
-    plugin: autotools
-    configflags:
-    - --datarootdir=/snap/$SNAPCRAFT_PROJECT_NAME/current/share
-    - --disable-libnotify
-    - --disable-webkitgtk
-    build-packages:
-    - gnome-pkg-tools
-    - gnome-common
-    - yelp-tools
-    - gettext
-    - libglib2.0-dev
-    - libgtk-3-dev
-    organize:
-      snap/$SNAPCRAFT_PROJECT_NAME/current: /
+    plugin: nil
+    stage-packages:
+    - zenity
 
   main:
     after:
@@ -256,3 +242,8 @@ plugs:
   #network:
 
 #slots:
+
+layout:
+  # Fix resource relocation problem of zenity part
+  /usr/share/zenity:
+    symlink: $SNAP/usr/share/zenity
