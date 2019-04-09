@@ -100,19 +100,23 @@ init(){
         exit 1
     fi
 
-    if test -d share/applications; then
-        find \
-            share/applications \
-            -name '*.desktop' \
-            -print0 \
-            | xargs \
-            --no-run-if-empty \
-            --null \
-            --verbose \
-            sed \
-            --file "${RUNTIME_EXECUTABLE_DIRECTORY}"/patch-desktop-entries.sed \
-            --in-place
-    fi
+    for applications_directory in \
+        share/applications \
+        usr/share/applications; do
+        if test -d "${applications_directory}"; then
+            find \
+                "${applications_directory}" \
+                -name '*.desktop' \
+                -print0 \
+                | xargs \
+                --no-run-if-empty \
+                --null \
+                --verbose \
+                sed \
+                --file "${RUNTIME_EXECUTABLE_DIRECTORY}"/patch-desktop-entries.sed \
+                --in-place
+        fi
+    done
 
     exit 0
 }; declare -fr init
