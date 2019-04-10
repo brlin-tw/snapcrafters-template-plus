@@ -141,10 +141,10 @@ parts:
 
   # Integrate custom dialogs in your snap - doc - snapcraft.io
   # https://forum.snapcraft.io/t/integrate-custom-dialogs-in-your-snap/10825
-  zenity:
+  zenity-integration:
     plugin: nil
-    stage-packages:
-    - zenity
+    stage-snaps:
+    - zenity-integration
 
   main:
     after:
