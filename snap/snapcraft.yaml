@@ -209,18 +209,23 @@ apps:
 # https://docs.snapcraft.io/supported-interfaces/7744
 # Non-A/C: Non-autoconnect interface
 plugs:
-  # For snaps with a graphical user interface:
+  # Common desktop interfaces
+  # https://forum.snapcraft.io/t/the-desktop-interfaces/2042
   desktop:
   desktop-legacy:
-  x11:
   unity7:
   wayland:
 
   # GNOME and Gtk runtime via content sharing
+  # https://forum.snapcraft.io/t/desktop-app-support-gtk/6834
   gnome-3-28-1804:
     interface: content
     target: $SNAP/gnome-platform
     default-provider: gnome-3-28-1804
+
+  # Gtk Common Themes support
+  # https://forum.snapcraft.io/t/how-to-use-the-system-gtk-theme-via-the-gtk-common-themes-snap/6235
+  gsettings:
   gtk-3-themes:
     interface: content
     target: $SNAP/data-dir/themes
@@ -234,7 +239,7 @@ plugs:
     target: $SNAP/data-dir/sounds
     default-provider: gtk-common-themes
 
-  # Storage access
+  # Regular files access
   #home:
   #removable-media: # Non-A/C
 
