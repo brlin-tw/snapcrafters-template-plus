@@ -161,6 +161,7 @@ parts:
 
     source: .
     #source-type:
+    #source-branch:
     #source-tag:
     #source-depth:
     override-pull: |
