@@ -248,6 +248,19 @@ plugs:
   #home:
   #removable-media: # Non-A/C
 
+  # Application-specific files access
+  # The auto-connection requires store grant
+  # https://forum.snapcraft.io/t/the-personal-files-interface/9357
+  # https://forum.snapcraft.io/t/the-system-files-interface/9358
+  #user-wide-configs:
+    #interface: personal-files
+    #read:
+    #- $HOME/.config/my-awesome-app
+  #system-wide-configs:
+    #interface: system-files
+    #read:
+    #- /etc/my-awesome-app
+
   # Network access
   #network:
 
