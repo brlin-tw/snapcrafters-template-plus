@@ -139,8 +139,7 @@ parts:
 
     plugin: make
     build-packages:
-    - build-essential
-    - libgtk-3-dev
+    - gcc
     override-build: |
       snapcraftctl build
       mkdir -pv $SNAPCRAFT_PART_INSTALL/gnome-platform
