@@ -47,7 +47,7 @@ init(){
 
 # WORKAROUND: `@` expansion triggeres unbound variable error in Bash 4.3(Ubuntu 16.04)
 # http://mywiki.wooledge.org/BashFAQ/112#Negatives
-if "${#RUNTIME_COMMANDLINE_ARGUMENTS[@]}" -ne 0; then
+if test "${#RUNTIME_COMMANDLINE_ARGUMENTS[@]}" -ne 0; then
     init "${RUNTIME_COMMANDLINE_ARGUMENTS[@]}"
 else
     init
