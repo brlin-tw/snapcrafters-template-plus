@@ -54,6 +54,11 @@ icon: snap/gui/my-awesome-app.png
 # https://forum.snapcraft.io/t/extracting-information-from-sources-in-snapcraft-parts/4642
 adopt-info: main
 
+# Snapd feature set and version the snap requires in order to work
+# https://forum.snapcraft.io/t/snapcraft-top-level-metadata/8334#heading--assumes
+assumes:
+- command-chain
+
 # Base runtime
 # The common runtime for the snap to run on, or `bare` for static linked applications
 base: core18
