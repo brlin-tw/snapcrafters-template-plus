@@ -40,7 +40,7 @@ init(){
         esac
     done
 
-    if ! git describe &>/dev/null; then
+    if ! git describe --always &>/dev/null; then
         upstream_version=unknown
     else
         upstream_version="$(
