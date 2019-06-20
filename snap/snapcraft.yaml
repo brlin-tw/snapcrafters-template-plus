@@ -151,6 +151,12 @@ parts:
     stage-snaps:
     - zenity-integration
 
+  confinement-change-notice:
+    source: snap/local/confinement-change-notice
+    plugin: dump
+    organize:
+      confinement-change-launch: bin/
+
   main:
     after:
     # for patch-desktop-entries.*
@@ -202,6 +208,7 @@ apps:
     # The commands that are run, in order, before running the one specified by the `command` key
     command-chain:
     - bin/desktop-launch
+    - bin/confinement-change-launch
     - bin/my-awesome-app-launch
 
     # If the providing part of the app. has a desktop entry, specify its path relative to the `prime` directory.

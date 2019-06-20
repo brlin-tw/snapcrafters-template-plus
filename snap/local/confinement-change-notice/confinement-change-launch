@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+# This is the maintainence launcher to notify user regarding the confinement change
+# 林博仁(Buo-ren, Lin) © 2019
+set \
+    -o errexit \
+    -o errtrace \
+    -o nounset \
+    -o pipefail
+
+    declare notification_body_pango='In order to improve the user experience, the subsequent releases of the _snap_title_ snap will be set in <i>classic confinement</i>, which means that the snap will now gain identical access as regular non-snap native applications.
+    
+    For security reasons the snap automatic upgrade process will not occur during the confinement switch and requires manual intervention.  Please run the following command in a terminal to do so:
+    
+        <tt>sudo snap refresh --classic _snap_name_</tt>'
+
+    declare -A possible_dialog_commands=(
+        [dialog]=text
+        [qarma]=graphical
+        [whiptail]=text
+        [zenity]=graphical
+    )
+
+    # false/true
+    declare flag_graphical_dialog_available=unknown
+
+    declare dialog_command
+
+    for possible_dialog_command in "${!possible_dialog_commands[@]}"; do
+        if command -v "${possible_dialog_command}" &>/dev/null; then
+            dialog_command="${possible_dialog_command}"
+            if test "${possible_dialog_commands["${dialog_command}"]}" = graphical; then
+                flag_graphical_dialog_available=true
+
+                # Assume the first graphical one is what we wanted
+                break
+            fi
+        fi
+    done
+    unset \
+        possible_dialog_command \
+        possible_dialog_commands
+
+    if grep \
+        --quiet \
+        '^title: ' \
+        "${SNAP}"/meta/snap.yaml; then
+        declare SNAP_TITLE
+        SNAP_TITLE="$(
+            grep \
+                '^title: ' \
+                "${SNAP}"/meta/snap.yaml \
+                | cut \
+                    --characters=8-
+        )"
+    fi
+
+    if test -v SNAP_TITLE; then
+        notification_body_pango="${notification_body_pango/_snap_title_/"${SNAP_TITLE}"}"
+    else
+        notification_body_pango="${notification_body_pango/_snap_title_/"${SNAP_NAME}"}"
+    fi
+    notification_body_pango="${notification_body_pango/_snap_name_/"${SNAP_NAME}"}"
+
+    case "${dialog_command}" in \
+        qarma)
+            # Qarma doesn't honour literal new lines...
+            # however it did interprete <br>
+            notification_body_pango="$(
+                sed --in- '\n' '<br>'
+            )"
+            qarma \
+                --info \
+                --ok-label='Got it!' \
+                --text="${notification_body_pango}" \
+                --title='Snap confinement change notice' \
+                --width=800
+        ;;
+        zenity)
+            zenity \
+                --info \
+                --ok-label='Got it!' \
+                --text="${notification_body_pango}" \
+                --title='Snap confinement change notice' \
+                --width=800
+        ;;
+        *)
+            printf -- \
+                'Error: Dialog not implemented yet.\n' \
+                >&2
+            exit 1
+        ;;
+    esac
+
+# Finally run the next part of the command chain
+exec "${@}"
