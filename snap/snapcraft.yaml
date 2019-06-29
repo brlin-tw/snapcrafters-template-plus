@@ -111,6 +111,7 @@ parts:
 
   # Stage snap for fixing the glibc locales(and gnu gettext I18N support)
   # This part is only required for non GUI apps that don't uses the desktop-launch launchers
+  # https://forum.snapcraft.io/t/the-locales-launch-stage-snap/10296
   #locales-launch:
     #plugin: nil
     #stage-snaps:
