@@ -7,8 +7,8 @@
 
 **This is the unofficial snap for [Project]**, *"Single-line elevator pitch for your amazing snap"*. It works on Ubuntu, Fedora, Debian, and other major Linux distributions.
 
-<!-- Uncomment and modify this when you are provided a build status badge
-[![Build Status Badge of the `my-awesome-app` Snap](https://build.snapcraft.io/badge/_repo_owner_id_/_repo_name_id_.svg "Build Status of the `my-awesome-app` snap")](https://build.snapcraft.io/user/_repo_owner_id_/_repo_name_id_)
+<!-- Uncomment and modify this when you are provided a snap status badge
+[![Status Badge of the `my-awesome-app` Snap](https://snapcraft.io/my-awesome-app/badge.svg)](https://snapcraft.io/my-awesome-app)
 -->
 
 <!-- Uncomment and modify this when you have a screenshot
