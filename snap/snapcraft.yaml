@@ -57,7 +57,7 @@ adopt-info: main
 # Snapd feature set and version the snap requires in order to work
 # https://forum.snapcraft.io/t/snapcraft-top-level-metadata/8334#heading--assumes
 assumes:
-- command-chain
+  - command-chain
 
 # Base runtime
 # The common runtime for the snap to run on, or `bare` for static linked applications
@@ -89,7 +89,7 @@ parts:
     organize:
       '*': patching/
     prime:
-    - -*
+      - -*
 
   # Launcher programs to fix problems at runtime
   launchers:
@@ -98,7 +98,7 @@ parts:
     organize:
       '*': bin/
     stage:
-    - -bin/README.*
+      - -bin/README.*
 
   # Programs to modify the behavior of each step of the snapcraft lifecycles
   scriptlets:
@@ -107,7 +107,7 @@ parts:
     organize:
       '*': scriptlets/
     prime:
-    - -*
+      - -*
 
   # Stage snap for fixing the glibc locales(and gnu gettext I18N support)
   # This part is only required for non GUI apps that don't uses the desktop-launch launchers
@@ -140,7 +140,7 @@ parts:
 
     plugin: make
     build-packages:
-    - gcc
+      - gcc
     override-build: |
       snapcraftctl build
       mkdir -pv $SNAPCRAFT_PART_INSTALL/gnome-platform
@@ -150,15 +150,15 @@ parts:
   zenity-integration:
     plugin: nil
     stage-snaps:
-    - zenity-integration
+      - zenity-integration
 
   main:
     after:
-    # for patch-desktop-entries.*
-    - patching
+      # for patch-desktop-entries.*
+      - patching
 
-    # for override-pull script
-    - scriptlets
+      # for override-pull script
+      - scriptlets
 
     source: .
     #source-type:
@@ -176,7 +176,7 @@ parts:
     organize:
       my-awesome-app: bin/
     stage:
-    - bin/*
+      - bin/*
 
     override-prime: |
       set \
@@ -202,8 +202,8 @@ apps:
 
     # The commands that are run, in order, before running the one specified by the `command` key
     command-chain:
-    - bin/desktop-launch
-    - bin/my-awesome-app-launch
+      - bin/desktop-launch
+      - bin/my-awesome-app-launch
 
     # If the providing part of the app. has a desktop entry, specify its path relative to the `prime` directory.
     # If the packaging target doesn't provide a desktop entry, ignore the `desktop` key and implement a desktop entry in `/snap/gui`
@@ -257,11 +257,11 @@ plugs:
   #user-wide-configs:
     #interface: personal-files
     #read:
-    #- $HOME/.config/my-awesome-app
+      #- $HOME/.config/my-awesome-app
   #system-wide-configs:
     #interface: system-files
     #read:
-    #- /etc/my-awesome-app
+      #- /etc/my-awesome-app
 
   # Network access
   #network:
