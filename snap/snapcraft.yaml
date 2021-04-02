@@ -109,27 +109,22 @@ parts:
     prime:
       - -*
 
-  # Stage snap for fixing the glibc locales(and gnu gettext I18N support)
-  # This part is only required for non GUI apps that don't uses the desktop-launch launchers
+  # Stage snap for fixing the Glibc locales
   # https://forum.snapcraft.io/t/the-locales-launch-stage-snap/10296
-  #locales-launch:
-    #plugin: nil
-    #stage-snaps:
-    #- locales-launch
-    #stage-packages:
-    # For localedef(1)
-    #- libc-bin
-
-    # For locale data used by localedef(1)
-    #- locales
-
-    # All pre-generated locale data
-    # DISABLED: Lots of duplicate data will be included in snap when this is staged, unless the target machine has no resource to generate them in runtime otherwise not using it
-    #
-    #   Lack of compiled locales breaks gettext based localisation - snapcraft - snapcraft.io
-    #   https://forum.snapcraft.io/t/lack-of-compiled-locales-breaks-gettext-based-localisation/3758
-    #
-    #- locales-all
+  locales-launch:
+    source: https://github.com/Lin-Buo-Ren/locales-launch.git
+    source-tag: v1.0.0
+    plugin: dump
+    stage-packages:
+      - libc-bin
+      - locales
+    stage:
+      - bin/locales-launch
+      - etc/locale.alias
+      - usr/bin/localedef
+      - usr/share/doc/locales
+      - usr/share/i18n
+      - usr/share/locale
 
   # Remote part for support of various desktop technologies
   # Refer: https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml
