@@ -1,0 +1,30 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Snapcrafters Template Plus
+Upstream-Contact: 林博仁(Buo-ren, Lin) <https://github.com/brlin-tw/snapcrafters-template-plus/issues>
+Source: https://github.com/brlin-tw/snapcrafters-template-plus
+
+# Sample paragraph, commented out:
+#
+# Files: src/*
+# Copyright: $YEAR $NAME <$CONTACT>
+# License: ...
+
+Files:
+ README.md
+Copyright:
+ 2017-2019 The Snapcrafters Community <https://forum.snapcraft.io/>
+ 2019-2022 林博仁(Buo-ren, Lin)
+License: MIT
+
+Files:
+ */README.md
+ */README.markdown
+Copyright:
+ 2019-2022 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
+License: MIT
+
+Files:
+ snap/gui/my-awesome-app.png
+Copyright:
+ 2018 Canonical, Ltd. <https://ubuntu.com/legal/trademarks>
+License: LicenseRef-Canonical-Intellectual-Property-Rights-Policy

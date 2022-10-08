@@ -67,3 +67,7 @@ You may generate the unique hash by using the following command in terminal:
 | :-: | :-: |
 | [![Packager's avatar](http://gravatar.com/avatar/66a5b84972e73e895d5d68d48b1e1e22/?s=128)<br>Packager's name](mailto:packager.contact) | [![Upstream's avatar](GitHub-Mark.png)<br>Upstream's contact name](mailto:upstream.contact) |
 -->
+
+## Licensing
+
+This project comply with the REUSE specification, please refer the [.reuse/dep5](.reuse/dep5) file and each applicable file's header for licensing requirement of each resource.

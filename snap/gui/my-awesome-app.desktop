@@ -1,6 +1,9 @@
 # Demonstration desktop entry file for Snapcrafters Template Plus
 # Refer the Desktop Entry Specification on how to write this file:
 # https://specifications.freedesktop.org/desktop-entry-spec
+#
+# Copyright 2019 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
+# SPDX-License-Identifier: CC-BY-SA-4.0
 [Desktop Entry]
 Version=1.0
 Type=Application

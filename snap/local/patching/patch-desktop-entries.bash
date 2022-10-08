@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Utility script to patch desktop entries in snap, should only be run in the `override-prime` scriptlet
-# 林博仁 © 2018
+#
+# Copyright 2018, 2019 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
+# SPDX-License-Identifier: MIT
 
 ## Makes debuggers' life easier - Unofficial Bash Strict Mode
 ## BASHDOC: Shell Builtin Commands - Modifying Shell Behavior - The Set Builtin
