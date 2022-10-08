@@ -39,7 +39,8 @@ description: |
 icon: snap/gui/my-awesome-app.png
 
 # The license of this application, in SPDX format
-# NOTE: Currently only supports SPDX 2.1 license expressions, as described in Appendix IV of
+# NOTE: Currently only supports SPDX 2.1 license expressions, as described
+# in Appendix IV of
 # https://spdx.org/spdx-specification-21-web-version
 # Supported expressions:
 # https://github.com/snapcore/snapd/blob/HEAD/spdx/licenses.go
@@ -79,10 +80,12 @@ confinement: strict
 # snaps can be promoted to `candidate` and `stable` channels
 grade: stable
 
-# Run `snapcraft help sources` for supported keywords on pulling a part's source ingredients
+# Run `snapcraft help sources` for supported keywords on pulling a part's
+# source ingredients
 # Run `snapcraft plugins` for supported build helper plugins
 # Run `snapcraft help plugins` for supported keywords on building a part
-# For `override-*` scriptlets used to modify behavior of certain part's lifecycle phase, check out:
+# For `override-*` scriptlets used to modify behavior of certain part's
+# lifecycle phase, check out:
 # https://docs.snapcraft.io/scriptlets/4892
 parts:
   # Files to patch the files in the snap
@@ -103,7 +106,8 @@ parts:
     stage:
       - -bin/README.*
 
-  # Programs to modify the behavior of each step of the snapcraft lifecycles
+  # Programs to modify the behavior of each step of the snapcraft
+  # lifecycles
   scriptlets:
     source: snap/local/scriptlets
     plugin: dump
@@ -185,37 +189,47 @@ parts:
       "${SNAPCRAFT_STAGE}"/patching/patch-desktop-entries.bash
 
 # Apps that are exposed by the snap package
-# If the _app_name_ is identical with the _snap_name_ it can be directly run
-# with `_snap_name_` or `snap run _snap_name_` commands, otherwise it can only be run
-# via `_snap_name_._app_name_` or `snap run _snap_name_._app_name_`
+# If the _app_name_ is identical with the _snap_name_ it can be directly
+# run with `_snap_name_` or `snap run _snap_name_` commands, otherwise it
+# can only be run # via `_snap_name_._app_name_` or
+# `snap run _snap_name_._app_name_`
 apps:
   my-awesome-app:
     # The adapter to set up runtime environment at the launch of the snap
     # NOTE: The `command-chain` property is only supported by the `full` adapter
     adapter: full
 
-    # An *relative path* to an executable file root from the `prime` directory to be executed, and its command-line arguments
-    # NOTE: The right angle bracket at the beginning of the value of the `command` keyword starts a YAML folded style block scalar, refer the following spec document for more info: http://yaml.org/spec/1.2/spec.html#id2796251
+    # An *relative path* to an executable file root from the `prime`
+    # directory to be executed, and its command-line arguments
+    # NOTE: The right angle bracket at the beginning of the value of the
+    # `command` keyword starts a YAML folded style block scalar, refer
+    # the following spec document for more info:
+    # http://yaml.org/spec/1.2/spec.html#id2796251
     #
     # Workaround the command somehow trigger "Failed to generate snap metadata:
     # The specified command '/bin/bash $SNAP/bin/my-awesome-app' defined in the
     # app 'my-awesome-app' does not match the pattern expected by snapd." error
     # message
-    # Bug #1820055 “The restriction of the `apps._app_name_.command` p...” : Bugs : Snapcraft
+    # Bug #1820055 “The restriction of the `apps._app_name_.command` p...”
+    # : Bugs : Snapcraft
     # https://bugs.launchpad.net/snapcraft/+bug/1820055
     #command: bin/my-awesome-app
     command: my-awesome-app
 
-    # The commands that are run, in order, before running the one specified by the `command` key
+    # The commands that are run, in order, before running the one
+    # specified by the `command` key
     command-chain:
       - bin/desktop-launch
       - bin/my-awesome-app-launch
 
-    # If the providing part of the app. has a desktop entry, specify its path relative to the `prime` directory.
-    # If the packaging target doesn't provide a desktop entry, ignore the `desktop` key and implement a desktop entry in `/snap/gui`
+    # If the providing part of the app. has a desktop entry, specify its
+    # path relative to the `prime` directory.
+    # If the packaging target doesn't provide a desktop entry, ignore the
+    # `desktop` key and implement a desktop entry in `/snap/gui`
     #desktop: share/applications/my-awesome-app.desktop
 
-# Refer the following documentation for asserting interface plugs and slots in a security confined snap:
+# Refer the following documentation for asserting interface plugs and
+# slots in a security confined snap:
 # Interface management - doc - snapcraft.io
 # https://docs.snapcraft.io/interface-management/6154
 # Supported interfaces - doc - snapcraft.io

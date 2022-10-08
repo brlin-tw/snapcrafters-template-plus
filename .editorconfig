@@ -23,7 +23,8 @@ trim_trailing_whitespace = true
 [.git*]
 indent_style = tab
 
-# Avoid git patch fail to apply due to stripped unmodified lines that contains only spaces
+# Avoid git patch fail to apply due to stripped unmodified lines that
+# contains only spaces
 [/.git/**]
 trim_trailing_whitespace = false
 
@@ -36,9 +37,9 @@ indent_style = tab
 # Trailing whitespace means manual linebreaks
 trim_trailing_whitespace = false
 
-# Don't check indentation size as it can't handle intentional indentation
-# in list item after hardbreaks to align with the node markers, use
-# Markdownlint to check instead
+# Don't check indentation size as it can't handle intentional
+# indentation in list item after hardbreaks to align with the node
+# markers, use Markdownlint to check instead
 indent_size = unset
 
 [*.patch]
