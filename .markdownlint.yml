@@ -1,0 +1,50 @@
+# Markdownlint(Node.js variant) configuration file
+# https://github.com/igorshubovych/markdownlint-cli#configuration
+#
+# This file is based on The Common Markdownlint(Node.js variant) Configuration Templates project
+# https://github.com/Lin-Buo-Ren/common-markdownlint-nodejs-config-templates
+#
+# Copyright 2021 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
+# SPDX-License-Identifier: CC-BY-SA-4.0
+
+# Inherit Markdownlint rules
+default: True
+
+# Only allow consistent un-ordered list bullet style(allow alternations in  sub-levels)
+MD004:
+  style: sublist
+
+# Only allow 4 spaces as indentation of lists
+MD007:
+  indent: 4
+
+# Only allow 2 spaces as linebreak sequence
+MD009:
+  br_spaces: 2
+
+# Disable line length limitation(not suitable with CJK context)
+MD013: False
+
+# Allow missing padding blank line between the heading markup and the context
+MD022: False
+
+# Allow duplicated non-sibling heading text
+MD024:
+  siblings_only: True
+
+# Allow missing padding blank line between a list and its context
+MD032: False
+
+# Allow using raw HTML markups as workarounds of deficiencies of Markdown
+MD033: False
+
+# 佔位字是要被替換掉的，為此規則之特例
+MD036: false
+
+# Allow using YAML front matter, while not require the definition of the
+# `title` property
+MD041:
+  front_matter_title: '.*'
+
+# Empty links are for the template consumer to fill in
+MD042: false

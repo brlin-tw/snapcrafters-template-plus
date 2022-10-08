@@ -1,0 +1,33 @@
+# GitHub Actions workflow for checking potential problems in the project
+#
+# References:
+#
+# * Workflow syntax for GitHub Actions - GitHub Docs
+#   https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
+#
+# Copyright 2022 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
+# SPDX-License-Identifier: CC-BY-SA-4.0
+name: Check potential problems in the project
+on:
+  - push
+jobs:
+  check-using-precommit:
+    name: Check potential problems using pre-commit
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checking out content from repository
+        uses: actions/checkout@v2
+
+      - name: Install pre-commit
+        run: pip3 install pre-commit
+
+      - name: Check all files in project using pre-commit
+        run: pre-commit run --all-files --color always
+
+      - name: Send CI result notification to the Telegram channel
+        uses: yanzay/notify-telegram@v0.1.0
+        if: always()
+        with:
+          chat: '@brlin_project_ci_results'
+          token: ${{ secrets.telegram_bot_api_token_ci }}
+          status: ${{ job.status }}

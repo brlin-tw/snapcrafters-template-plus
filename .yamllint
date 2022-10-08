@@ -1,0 +1,137 @@
+%YAML 1.2
+---
+# Configuration File of yamllint
+# https://yamllint.readthedocs.io
+#
+# This file is in YAML Ain’t Markup Language (YAML™)
+# http://yaml.org/
+#
+# This file is based on the `default` pre-defined configuration from yamllint with documentation copied from its documentation
+# https://yamllint.readthedocs.io/en/stable/configuration.html#default-configuration
+#
+# This file is based on The Unofficial yamllint Configuration Templates
+# https://github.com/Lin-Buo-Ren/yamllint-configuration-templates
+#
+# Copyright 2021 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
+# SPDX-License-Identifier: CC-BY-SA-4.0
+rules:
+  # Use this rule to control the number of spaces inside braces (`{` and `}`).
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.braces
+  braces:
+    min-spaces-inside: 0
+    max-spaces-inside: 0
+    min-spaces-inside-empty: -1
+    max-spaces-inside-empty: -1
+
+  # Use this rule to control the number of spaces inside brackets (`[` and `]`).
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.brackets
+  brackets:
+    min-spaces-inside: 0
+    max-spaces-inside: 0
+    min-spaces-inside-empty: -1
+    max-spaces-inside-empty: -1
+
+  # Use this rule to control the number of spaces before and after colons (`:`).
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.colons
+  colons:
+    max-spaces-before: 0
+    max-spaces-after: 1
+
+  # Use this rule to control the number of spaces before and after commas (`,`).
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.commas
+  commas:
+    max-spaces-before: 0
+    min-spaces-after: 1
+    max-spaces-after: 1
+
+  # Use this rule to control the position and formatting of comments.
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.comments
+  comments:
+    level: warning
+    # PATCHED: Comments without separate space are disabled content
+    require-starting-space: false
+    # PATCHED: We're good with 1
+    min-spaces-from-content: 1
+
+  # Use this rule to force comments to be indented like content.
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.comments_indentation
+  # PATCHED: False positives, disabled
+  comments-indentation: disable
+    #level: warning
+
+  # Use this rule to require or forbid the use of document end marker (`...`).
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.document_end
+  document-end: disable
+
+  # Use this rule to require or forbid the use of document start marker (`---`).
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.document_start
+  # PATCHED: Some config allows, while some config rejects document start markers
+  document-start: disable
+    #level: warning
+    #present: true
+
+  # Use this rule to set a maximal number of allowed consecutive blank lines.
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.empty_lines
+  empty-lines:
+    max: 2
+    max-start: 0
+    max-end: 0
+
+  # Use this rule to prevent nodes with empty content, that implicitly result in null values.
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.empty_values
+  empty-values:
+    forbid-in-block-mappings: false
+    forbid-in-flow-mappings: false
+
+  # Use this rule to control the number of spaces after hyphens (`-`).
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.hyphens
+  hyphens:
+    max-spaces-after: 1
+
+  # Use this rule to control the indentation.
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.indentation
+  indentation:
+    spaces: consistent
+    indent-sequences: true
+    check-multi-line-strings: false
+
+  # Use this rule to prevent multiple entries with the same key in mappings.
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.key_duplicates
+  key-duplicates: enable
+
+  # Use this rule to enforce alphabetical ordering of keys in mappings. The sorting order uses the Unicode code point number. As a result, the ordering is case-sensitive and not accent-friendly (see examples below).
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.key_ordering
+  key-ordering: disable
+
+  # Use this rule to set a limit to lines length.
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.line_length
+  line-length:
+    # PATCHED: Modern text editors handle long lines nicely
+    max: 99999
+    allow-non-breakable-words: true
+    allow-non-breakable-inline-mappings: false
+
+  # Use this rule to require a new line character (`\n`) at the end of files.
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.new_line_at_end_of_file
+  new-line-at-end-of-file: enable
+
+  # Use this rule to force the type of new line characters.
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.new_lines
+  new-lines:
+    type: unix
+
+  # Use this rule to prevent values with octal numbers. In YAML, numbers that start with `0` are interpreted as octal, but this is not always wanted. For instance `010` is the city code of Beijing, and should not be converted to `8`.
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.octal_values
+  octal-values:
+    forbid-implicit-octal: false
+    forbid-explicit-octal: false
+
+  # Use this rule to forbid trailing spaces at the end of lines.
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.trailing_spaces
+  trailing-spaces: enable
+
+  # Use this rule to forbid non-explictly typed truthy values other than `true` and `false`, for example `YES`, `False` and `off`.
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.truthy
+  truthy:
+    level: warning
+...
