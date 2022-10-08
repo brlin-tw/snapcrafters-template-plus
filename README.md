@@ -4,6 +4,10 @@ This is the unofficial snap packaging for [Project], [Snaps are universal Linux 
 
 Refer [snap/README.md](snap/README.md) for user-oriented information.
 
+<!--
+![GitHub Actions workflow status badge](https://github.com/_namespace_/_project_/actions/workflows/check-potential-problems.yml/badge.svg "GitHub Actions workflow status") [![pre-commit enabled badge](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white "This project uses pre-commit to check potential problems")](https://pre-commit.com/) [![REUSE Specification compliance badge](https://api.reuse.software/badge/github.com/_namespace_/_project_ "This project complies to the REUSE specification to decrease software licensing costs")](https://api.reuse.software/info/github.com/_namespace_/_project_)
+-->
+
 ## Remaining Tasks
 
 Snapcrafters ([join us](https://forum.snapcraft.io/t/join-snapcrafters/1325)) are working to land snap install documentation and the [snapcraft.yaml](https://github.com/Lin-Buo-Ren/snapcrafters-template-plus/blob/master/snap/snapcraft.yaml) upstream so [Project] can authoritatively publish future releases.
@@ -12,7 +16,7 @@ Snapcrafters ([join us](https://forum.snapcraft.io/t/join-snapcrafters/1325)) ar
 
       It is recommended to *avoid forking the template repository* unless you're working on the template itself because you can only fork a repository once
 * [ ] Update the description of the repository
-* [ ] Update logos and references to `[Project]`, `my-awesome-app` and other placeholder names in `README.md`, `snap/README.md`, and `snap/snapcraft.yaml`
+* [ ] Update logos and references to `[Project]`, `my-awesome-app`, `_namespace_`, `_project_`, and other placeholder names in `README.md`, `snap/README.md`, and `snap/snapcraft.yaml`
 * [ ] Add upstream contact information to this `README.md`
 * [ ] Create a snap that runs in `devmode`, [or in `classic` confinement if that's not possible](https://forum.snapcraft.io/t/subtle-differences-between-devmode-and-classic-confinement-snaps/7267)
     + [ ] If the snap must be packaged under `classic` confinement, file a [classic confinement request](https://forum.snapcraft.io/t/process-for-reviewing-classic-confinement-snaps/1460) topic in the Snapcraft Forum, under the `store` topic category - [template](https://github.com/Lin-Buo-Ren/snapcrafters-template-plus/wiki/Classic-Confinement-Request-Template) - [link]()
