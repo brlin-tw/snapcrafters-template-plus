@@ -1,5 +1,3 @@
-
-
 # branding
 
 This folder contains the branding assets of the snaps in the App. Store, let your application stand out of others by implementing banners, banner icon etc.
