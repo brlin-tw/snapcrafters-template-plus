@@ -26,15 +26,15 @@ Published for <img src="http://anything.codes/slack-emoji-for-techies/emoji/tux.
     sudo snap install --channel=edge --devmode my-awesome-app
     #sudo snap install --channel=beta my-awesome-app
     #sudo snap install my-awesome-app
-    
+
     # Connect the snap to essential security confinement interfaces #
     ## (Proper reasoning for connecting _plug_name_) ##
     sudo snap connect my-awesome-app:_plug_name_
-    
+
     # Connect the snap to optional security confinement interfaces #
     ## (Proper reasoning for connecting _plug_name_) ##
     sudo snap connect my-awesome-app:_plug_name_
-    
+
     # Launch the application #
     my-awesome-app
     snap run my-awesome-app # If you have another existing installation
@@ -47,7 +47,7 @@ Published for <img src="http://anything.codes/slack-emoji-for-techies/emoji/tux.
 ## What is Working
 * [A list of functionallities that are verified working]
 
-## What is NOT Working...yet 
+## What is NOT Working...yet
 Check out the [issue tracker](https://github.com/_repo_owner_id_/_repo_name_id_/issues) for known issues.
 -->
 

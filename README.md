@@ -61,7 +61,7 @@ You may generate the unique hash by using the following command in terminal:
 
 -->
 
-<!-- 
+<!--
 ## Contacts
 | Packager | Upstream |
 | :-: | :-: |
