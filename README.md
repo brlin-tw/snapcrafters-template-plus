@@ -9,7 +9,8 @@ Refer [snap/README.md](snap/README.md) for user-oriented information.
 Snapcrafters ([join us](https://forum.snapcraft.io/t/join-snapcrafters/1325)) are working to land snap install documentation and the [snapcraft.yaml](https://github.com/Lin-Buo-Ren/snapcrafters-template-plus/blob/master/snap/snapcraft.yaml) upstream so [Project] can authoritatively publish future releases.
 
 * [x] Create _snap_name_-snap (or any valid name you prefer) repository via the [Use this template](https://github.com/Lin-Buo-Ren/snapcrafters-template-plus/generate) button above
-    + It is recommended to *avoid forking the template repository* unless you're working on the template itself because you can only fork a repository once
+
+      It is recommended to *avoid forking the template repository* unless you're working on the template itself because you can only fork a repository once
 * [ ] Update the description of the repository
 * [ ] Update logos and references to `[Project]`, `my-awesome-app` and other placeholder names in `README.md`, `snap/README.md`, and `snap/snapcraft.yaml`
 * [ ] Add upstream contact information to this `README.md`
