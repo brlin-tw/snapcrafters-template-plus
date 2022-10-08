@@ -1,9 +1,90 @@
 # Version Tracking Ignore Rules for Git VCS
 # https://git-scm.com/docs/gitignore
 #
+# Exclude files not suitable for version tracking in Git
+#
+# This file is based on The Common .gitignore Templates
+# https://github.com/the-common/gitignore-templates
+#
 # Copyright 2018 The Snapcrafters Community <https://forum.snapcraft.io/>
-# Copyright 2018 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
-# SPDX-License-Identifier: MIT
+# Copyright 2018-2022 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
+# SPDX-License-Identifier: CC-BY-SA-4.0
+
+# Don't track regular Unix hidden files
+.*
+
+# Do track Git configuration files
+!.git*
+
+# Do track EditorConfig configuration files
+# https://editorconfig.org/
+!.editorconfig
+
+# Do track pre-commit configuration files
+# https://pre-commit.com/
+!.pre-commit-config.yaml
+
+# Do track Markdownlint configuration files
+# https://github.com/DavidAnson/markdownlint
+!.markdownlint.*
+
+# Do track Drone CI configuration files
+# https://docs.drone.io/
+!.drone.yml
+
+# Do track yamllint configuration files
+!.yamllint
+
+# Do track REUSE configuration files
+# https://reuse.software/
+!.reuse/
+
+# Don't track common backup filename extensions
+*~
+*.bak*
+*.backup*
+*.bk*
+*.old*
+*.orig*
+
+## Don't track common archive files
+*.7z
+*.bz2
+*.gz
+*.tar*
+*.xz
+*.zip
+
+# Don't track binary image files
+*.bmp
+*.jpg
+*.png
+
+# Don't track common export formats from Markdown
+*.doc?
+*.htm?
+*.pdf
+
+# Don't track common program output logs
+*.err
+*.error
+*.log
+*.out
+*.output
+
+# Don't track compiled Python code caches
+*.pyc
+
+# Don't track Vagrant runtime directories
+.vagrant/
+
+# Don't track GNU gettext message catalog template
+*.pot
+
+# Don't track GNU gettext machine-readable message catalogs
+*.mo
+
+# Don't track runtime-generated Python cache files
 __pycache__
 *.pyc
 
