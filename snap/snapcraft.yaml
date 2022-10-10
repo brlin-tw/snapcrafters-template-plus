@@ -153,6 +153,8 @@ parts:
     #source-branch:
     #source-tag:
     #source-depth:
+    build-packages:
+      - git
     override-pull: |
       set -o nounset
 
