@@ -70,6 +70,7 @@ You may generate the unique hash by using the following command in terminal:
 
 <!--
 ## Contacts
+
 | Packager | Upstream |
 | :-: | :-: |
 | [![Packager's avatar](http://gravatar.com/avatar/66a5b84972e73e895d5d68d48b1e1e22/?s=128)<br>Packager's name](mailto:packager.contact) | [![Upstream's avatar](GitHub-Mark.png)<br>Upstream's contact name](mailto:upstream.contact) |
