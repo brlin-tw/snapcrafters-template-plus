@@ -118,34 +118,20 @@ parts:
 
   # Stage snap for fixing the Glibc locales
   # https://forum.snapcraft.io/t/the-locales-launch-stage-snap/10296
-  locales-launch:
-    source: https://github.com/Lin-Buo-Ren/locales-launch.git
-    source-tag: v1.0.0
-    plugin: dump
-    stage-packages:
-      - libc-bin
-      - locales
-    stage:
-      - bin/locales-launch
-      - etc/locale.alias
-      - usr/bin/localedef
-      - usr/share/doc/locales
-      - usr/share/i18n
-      - usr/share/locale
-
-  # Remote part for support of various desktop technologies
-  # Refer: https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml
-  desktop-gnome-platform:
-    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
-    source-depth: 1
-    source-subdir: gtk
-
-    plugin: make
-    build-packages:
-      - gcc
-    override-build: |
-      snapcraftctl build
-      mkdir -pv $SNAPCRAFT_PART_INSTALL/gnome-platform
+  #locales-launch:
+    #source: https://github.com/Lin-Buo-Ren/locales-launch.git
+    #source-tag: v1.0.0
+    #plugin: dump
+    #stage-packages:
+      #- libc-bin
+      #- locales
+    #stage:
+      #- bin/locales-launch
+      #- etc/locale.alias
+      #- usr/bin/localedef
+      #- usr/share/doc/locales
+      #- usr/share/i18n
+      #- usr/share/locale
 
   # Integrate custom dialogs in your snap - doc - snapcraft.io
   # https://forum.snapcraft.io/t/integrate-custom-dialogs-in-your-snap/10825
@@ -219,6 +205,10 @@ apps:
     # `desktop` key and implement a desktop entry in `/snap/gui`
     #desktop: share/applications/my-awesome-app.desktop
 
+    # Snapcraft extensions that help building certain snaps
+    extensions:
+      - gnome-3-38
+
 # Refer the following documentation for asserting interface plugs and
 # slots in a security confined snap:
 # Interface management - doc - snapcraft.io
@@ -226,36 +216,13 @@ apps:
 # Supported interfaces - doc - snapcraft.io
 # https://docs.snapcraft.io/supported-interfaces/7744
 # Non-A/C: Non-autoconnect interface
-plugs:
+#plugs:
   # Common desktop interfaces
   # https://forum.snapcraft.io/t/the-desktop-interfaces/2042
-  desktop:
-  desktop-legacy:
-  unity7:
-  wayland:
-
-  # GNOME and Gtk runtime via content sharing
-  # https://forum.snapcraft.io/t/desktop-app-support-gtk/6834
-  gnome-3-28-1804:
-    interface: content
-    target: $SNAP/gnome-platform
-    default-provider: gnome-3-28-1804
-
-  # Gtk Common Themes support
-  # https://forum.snapcraft.io/t/how-to-use-the-system-gtk-theme-via-the-gtk-common-themes-snap/6235
-  gsettings:
-  gtk-3-themes:
-    interface: content
-    target: $SNAP/data-dir/themes
-    default-provider: gtk-common-themes
-  icon-themes:
-    interface: content
-    target: $SNAP/data-dir/icons
-    default-provider: gtk-common-themes
-  sound-themes:
-    interface: content
-    target: $SNAP/data-dir/sounds
-    default-provider: gtk-common-themes
+  #desktop:
+  #desktop-legacy:
+  #unity7:
+  #wayland:
 
   # Regular files access
   #home:
