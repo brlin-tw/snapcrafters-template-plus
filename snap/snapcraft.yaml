@@ -198,7 +198,6 @@ apps:
     # The commands that are run, in order, before running the one
     # specified by the `command` key
     command-chain:
-      - bin/desktop-launch
       - bin/my-awesome-app-launch
 
     # If the providing part of the app. has a desktop entry, specify its
