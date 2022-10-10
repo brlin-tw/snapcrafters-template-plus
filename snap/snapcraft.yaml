@@ -66,7 +66,7 @@ assumes:
 # Base runtime
 # The common runtime for the snap to run on, or `bare` for static linked applications
 # https://docs.snapcraft.io/snapcraft-top-level-metadata/8334#heading--base
-base: core18
+base: core20
 
 # Security confinement
 # Use `devmode` to getting started
@@ -205,16 +205,7 @@ apps:
     # `command` keyword starts a YAML folded style block scalar, refer
     # the following spec document for more info:
     # http://yaml.org/spec/1.2/spec.html#id2796251
-    #
-    # Workaround the command somehow trigger "Failed to generate snap metadata:
-    # The specified command '/bin/bash $SNAP/bin/my-awesome-app' defined in the
-    # app 'my-awesome-app' does not match the pattern expected by snapd." error
-    # message
-    # Bug #1820055 “The restriction of the `apps._app_name_.command` p...”
-    # : Bugs : Snapcraft
-    # https://bugs.launchpad.net/snapcraft/+bug/1820055
-    #command: bin/my-awesome-app
-    command: my-awesome-app
+    command: bin/my-awesome-app
 
     # The commands that are run, in order, before running the one
     # specified by the `command` key
