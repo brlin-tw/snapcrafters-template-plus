@@ -79,7 +79,7 @@ init(){
 }
 
 print_usage(){
-    printf -- 'Usage: main-adopt-info [options] _snap_name_\n'
+    printf -- 'Usage: main-adopt-info [options]\n'
     printf -- 'options: [--debug|--dry-run|--help]\n'
 }
 
