@@ -194,6 +194,8 @@ process_commandline_arguments() {
 
 ## Traps: Functions that are triggered when certain condition occurred
 ## Shell Builtin Commands » Bourne Shell Builtins » trap
+# Trap commands are called on demand
+# shellcheck disable=SC2317
 trap_errexit(){
     printf \
         'An error occurred and the script is prematurely aborted\n' \
@@ -201,10 +203,14 @@ trap_errexit(){
     return 0
 }; declare -fr trap_errexit; trap trap_errexit ERR
 
+# Trap commands are called on demand
+# shellcheck disable=SC2317
 trap_exit(){
     return 0
 }; declare -fr trap_exit; trap trap_exit EXIT
 
+# Trap commands are called on demand
+# shellcheck disable=SC2317
 trap_return(){
     local returning_function="${1}"
 
@@ -215,6 +221,8 @@ trap_return(){
         1>&2
 }; declare -fr trap_return
 
+# Trap commands are called on demand
+# shellcheck disable=SC2317
 trap_interrupt(){
     printf '\n' # Separate previous output
     printf \
