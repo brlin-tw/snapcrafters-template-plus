@@ -1,8 +1,8 @@
 # Unofficial Snap Packaging for [Project]
 
 <!--
-	Use the Staticaly service for easy access to in-repo pictures:
-	https://www.staticaly.com/
+	Use the Statically service for easy access to in-repo pictures:
+	https://www.statically.io/
 -->
 ![(Placeholder) Icon of [Project]](https://cdn.staticaly.com/gh/Lin-Buo-Ren/snapcrafters-template-plus/bea3bc56/snap/gui/my-awesome-app.png "(Placeholder) Icon of [Project]")
 
