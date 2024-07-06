@@ -15,7 +15,6 @@ init(){
         flag_dry_run=false \
         upstream_version \
         packaging_revision \
-        some_place_under_the_project_repo \
         snap_version_string
 
     for commandline_argument in "${@}"; do
