@@ -1,0 +1,24 @@
+# Git path attributes configuration file
+#
+# References:
+#
+# * Git - Git Attributes
+#   https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes
+# * Git - gitattributes Documentation
+#   https://www.git-scm.com/docs/gitattributes
+#
+# Copyright 2023 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
+# SPDX-License-Identifier: CC-BY-SA-4.0 OR LicenseRef-Apache-2.0-If-Not-Used-In-Template-Projects
+
+# Avoid exporting development files to release archive
+/.* export-ignore
+/continuous-integration export-ignore
+
+# Keep editorconfig for ease of editing of product files
+/.editorconfig -export-ignore
+
+# Keep REUSE DEP5 declaration file in the release archive for legal
+# conformance
+/.reuse/ -export-ignore
+/.reuse/* export-ignore
+/.reuse/dep5 -export-ignore

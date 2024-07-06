@@ -1,0 +1,74 @@
+# Release product and their build aritfacts
+#
+# References:
+#
+# * Workflow syntax for GitHub Actions - GitHub Docs
+#   https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
+#
+# Copyright 2023 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
+# SPDX-License-Identifier: CC-BY-SA-4.0
+name: Release product and their build aritfacts
+on:
+  push:
+    tags:
+      - v*.*.*
+
+jobs:
+  release:
+    name: Release product and their build aritfacts
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out content from the Git repository
+        uses: actions/checkout@v4
+        with:
+          # Increase fetch depth if you may have more than this amount
+          # of revisions between releases
+          fetch-depth: 100
+
+          # Fetch tags as well to generate detailed changes between two releases
+          # WORKAROUND: Adding this option triggers actions/checkout#1467
+          #fetch-tags: true
+
+      - name: >-
+          WORKAROUND: Fetch tags that points to the revisions
+          checked-out(actions/checkout#1467)
+        run: |-
+          git fetch \
+            --prune \
+            --prune-tags \
+            --force \
+            --depth=100 \
+            --no-recurse-submodules
+
+      - name: Determine the project identifier
+        run: printf "project_id=${GITHUB_REPOSITORY##*/}\\n" >> $GITHUB_ENV
+
+      - name: Determine the name of the Git tag
+        run: printf "release_tag=${GITHUB_REF##*/}\\n" >> $GITHUB_ENV
+
+      - name: Determine the release version string
+        run: printf "release_version=${release_tag#v}\\n" >> $GITHUB_ENV
+
+      - name: Determine the release identifier
+        run: printf "release_id=${project_id}-${release_version}\\n" >> $GITHUB_ENV
+
+      - name: >-
+          Patch the sudo security policy so that programs run via sudo
+          will recognize environment variables predefined by GitHub
+        run: sudo ./continuous-integration/patch-github-actions-sudo-security-policy.sh
+
+      - name: Generate the release archive
+        run: |-
+          sudo ./continuous-integration/generate-build-artifacts.install-system-deps.sh
+          ./continuous-integration/generate-build-artifacts.sh
+
+      - name: Generate the release description
+        run: ./continuous-integration/generate-release-description.sh
+
+      - name: Publish the release archive to the GitHub Releases
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          name: ${{ env.project_id }} ${{ env.release_version }}
+          files: |
+            ${{ env.release_id }}.tar*
+          body_path: .detailed_changes

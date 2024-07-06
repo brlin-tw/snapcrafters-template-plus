@@ -5,7 +5,8 @@ This is the unofficial snap packaging for [Project], [Snaps are universal Linux 
 Refer [snap/README.md](snap/README.md) for user-oriented information.
 
 <!--
-![GitHub Actions workflow status badge](https://github.com/_namespace_/_project_/actions/workflows/check-potential-problems.yml/badge.svg "GitHub Actions workflow status") [![pre-commit enabled badge](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white "This project uses pre-commit to check potential problems")](https://pre-commit.com/) [![REUSE Specification compliance badge](https://api.reuse.software/badge/github.com/_namespace_/_project_ "This project complies to the REUSE specification to decrease software licensing costs")](https://api.reuse.software/info/github.com/_namespace_/_project_)
+<https://gitlab.com/_namespace_/_project_>  
+[![The GitLab CI pipeline status badge of the project's `main` branch](https://gitlab.com/_namespace_/_project_/badges/main/pipeline.svg?ignore_skipped=true "Click here to check out the comprehensive status of the GitLab CI pipelines")](https://gitlab.com/_namespace_/_project_/-/pipelines) [![GitHub Actions workflow status badge](https://github.com/_namespace_/_project_/actions/workflows/check-potential-problems.yml/badge.svg "GitHub Actions workflow status")](https://github.com/_namespace_/_project_/actions/workflows/check-potential-problems.yml) [![pre-commit enabled badge](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white "This project uses pre-commit to check potential problems")](https://pre-commit.com/) [![REUSE Specification compliance badge](https://api.reuse.software/badge/gitlab.com/_namespace_/_project_ "This project complies to the REUSE specification to decrease software licensing costs")](https://api.reuse.software/info/gitlab.com/_namespace_/_project_)
 -->
 
 ## Remaining Tasks
@@ -76,6 +77,16 @@ You may generate the unique hash by using the following command in terminal:
 | [![Packager's avatar](http://gravatar.com/avatar/66a5b84972e73e895d5d68d48b1e1e22/?s=128)<br>Packager's name](mailto:packager.contact) | [![Upstream's avatar](GitHub-Mark.png)<br>Upstream's contact name](mailto:upstream.contact) |
 -->
 
+<!--
+## References
+
+The following resources are referenced during the development of this project:
+
+To be addressed.
+-->
+
 ## Licensing
 
-This project comply with the REUSE specification, please refer the [.reuse/dep5](.reuse/dep5) file and each applicable file's header for licensing requirement of each resource.
+Unless otherwise noted(individual file's header/[REUSE DEP5](.reuse/dep5)), this product is licensed under [the MIT license](https://opensource.org/license/mit), or any of its recent versions you would prefer.
+
+This work complies to [the REUSE Specification](https://reuse.software/spec/), refer the [REUSE - Make licensing easy for everyone](https://reuse.software/) website for info regarding the licensing of this product.

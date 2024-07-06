@@ -9,20 +9,50 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0
 name: Check potential problems in the project
 on:
-  - push
+  push:
+    branches:
+      - '**'
 jobs:
   check-using-precommit:
     name: Check potential problems using pre-commit
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+    env:
+      PIP_CACHE_DIR: ${{ github.workspace }}/.cache/pip
+      PRE_COMMIT_HOME: ${{ github.workspace }}/.cache/pre-commit
+      SHELLCHECK_DIR: ${{ github.workspace }}/.cache/shellcheck-stable
     steps:
-      - name: Checking out content from repository
-        uses: actions/checkout@v2
+      - name: Check out content from the Git repository
+        uses: actions/checkout@v4
 
-      - name: Install pre-commit
-        run: pip3 install pre-commit
+      - name: Configure PyPI data cache to speed up continuous integration
+        uses: actions/cache@v3
+        with:
+          key: ${{ runner.os }}-pip
+          path: ${{ env.PIP_CACHE_DIR }}
 
-      - name: Check all files in project using pre-commit
-        run: pre-commit run --all-files --color always
+      - name: >-
+          Configure pre-commit data cache to speed up continuous integration
+        uses: actions/cache@v3
+        with:
+          key: pre-commit|${{ env.PY }}|${{ hashFiles('.pre-commit-config.yaml') }}
+          path: ${{ env.PRE_COMMIT_HOME }}
+
+      - name: >-
+          Configure pre-built ShellCheck cache to speed up continuous integration
+        uses: actions/cache@v3
+        with:
+          key: ${{ runner.os }}-${{ runner.arch }}-shellcheck
+          path: ${{ env.SHELLCHECK_DIR }}
+
+      - name: >-
+          Patch the sudo security policy so that programs run via sudo
+          will recognize environment variables predefined by GitHub
+        run: sudo ./continuous-integration/patch-github-actions-sudo-security-policy.sh
+
+      - name: Run the static analysis programs
+        run: |
+          sudo ./continuous-integration/do-static-analysis.install-system-deps.sh
+          ./continuous-integration/do-static-analysis.sh
 
       - name: Send CI result notification to the Telegram channel
         uses: yanzay/notify-telegram@v0.1.0

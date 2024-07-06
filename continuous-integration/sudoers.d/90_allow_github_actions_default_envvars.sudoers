@@ -1,0 +1,20 @@
+# Allow exposing GitHub Actions default environment variables to the invoked superuser processes
+#
+# References:
+#
+# * Command environment | Sudoers Manual | Sudo
+#   https://www.sudo.ws/docs/man/sudoers.man/#Command_environment
+# * Default environment - variablesVariables - GitHub Docs
+#   https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
+#
+# Copyright 2023 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
+# SPDX-License-Identifier: CC-BY-SA-4.0 OR LicenseRef-Apache-2.0-If-Not-Used-In-Template-Projects
+
+# Whether we are in an CI environment
+Defaults env_keep += "CI"
+
+# Variables defined by GitHub
+Defaults env_keep += "GITHUB_*"
+
+# Variables defined by the GitHub Action runners
+Defaults env_keep += "RUNNER_*"

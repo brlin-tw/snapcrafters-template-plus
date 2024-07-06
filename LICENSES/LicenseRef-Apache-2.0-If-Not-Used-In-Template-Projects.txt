@@ -1,0 +1,17 @@
+# The Apache-2.0-If-Not-Used-In-Template-Projects pseudo license
+
+Assets that are declared as either licensed under [the 4.0 International
+version of the Creative Commons Attribution-ShareAlike license](https://creativecommons.org/licenses/by-sa/4.0/)
+or this pseudo license can be licensed otherwise under [the 2.0 version
+of the Apache license](https://www.apache.org/licenses/LICENSE-2.0) _if_
+it is used to instantiate/refactor a project based on it rather than
+using it in the making of another template project.  This allows
+re-licensing the project assets to your liking in your non-template
+projects with only a legal conformance requirement of attributing this
+product somewhere in your project/product credits/acknowledgment/copyright
+notice documentation/user interface.
+
+Note that some assets that are not declared using this pseudo license
+may also allow re-licensing as the declared license does not impose such
+restrictions in the first place, refer the individual license terms for
+details.

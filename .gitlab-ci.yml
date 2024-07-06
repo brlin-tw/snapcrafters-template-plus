@@ -1,0 +1,66 @@
+# GitLab CI configuration file
+#
+# References:
+#
+# * `.gitlab-ci.yml` keyword reference | GitLab
+#   https://docs.gitlab.com/ee/ci/yaml/
+#
+# Copyright 2023 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
+# SPDX-License-Identifier: CC-BY-SA-4.0 OR LicenseRef-Apache-2.0-If-Not-Used-In-Template-Projects
+do-static-analysis:
+  stage: test
+  rules:
+    - if: $CI_COMMIT_TAG == null
+  needs: []
+  image: ubuntu:22.04
+  variables:
+    PIP_CACHE_DIR: ${CI_PROJECT_DIR}/.cache/pip
+    PRE_COMMIT_HOME: ${CI_PROJECT_DIR}/.cache/pre-commit
+    SHELLCHECK_DIR: ${CI_PROJECT_DIR}/.cache/shellcheck-stable
+  cache:
+    # Enable per-job and per-branch caching
+    key: $CI_JOB_NAME-$CI_COMMIT_REF_SLUG
+    paths:
+      - ${PIP_CACHE_DIR}
+      - ${PRE_COMMIT_HOME}
+      - ${SHELLCHECK_DIR}
+
+  script:
+    - ./continuous-integration/do-static-analysis.install-system-deps.sh
+    - ./continuous-integration/do-static-analysis.sh
+
+generate-build-artifacts:
+  stage: build
+  rules:
+    - if: $CI_COMMIT_TAG
+  needs: []
+  image: ubuntu:22.04
+  artifacts:
+    paths:
+      - ${CI_PROJECT_NAME}-*.tar*
+  script:
+    - ./continuous-integration/generate-build-artifacts.install-system-deps.sh
+    - ./continuous-integration/generate-build-artifacts.sh
+
+upload-release-assets:
+  stage: deploy
+  rules:
+    - if: $CI_COMMIT_TAG
+  needs:
+    - generate-build-artifacts
+  image: curlimages/curl:latest
+  script:
+    - ./continuous-integration/upload-gitlab-generic-packages.sh
+
+create-release:
+  stage: deploy
+  rules:
+    - if: $CI_COMMIT_TAG
+  needs:
+    - generate-build-artifacts
+    - upload-release-assets
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  script:
+    - apk add bash git
+    - ./continuous-integration/generate-release-description.sh
+    - ./continuous-integration/create-gitlab-release.sh

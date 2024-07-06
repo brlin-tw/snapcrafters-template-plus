@@ -10,21 +10,21 @@ Source: https://github.com/brlin-tw/snapcrafters-template-plus
 # License: ...
 
 Files:
- README.md
+    README.md
 Copyright:
- 2017-2019 The Snapcrafters Community <https://forum.snapcraft.io/>
- 2019-2022 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
+    2017-2019 The Snapcrafters Community <https://forum.snapcraft.io/>
+    2019-2022 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
 License: MIT
 
 Files:
- */README.md
- */README.markdown
+    */README.md
+    */README.markdown
 Copyright:
- 2019-2022 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
+    2019-2022 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
 License: MIT
 
 Files:
- snap/gui/my-awesome-app.png
+    snap/gui/my-awesome-app.png
 Copyright:
- 2018 Canonical, Ltd. <https://ubuntu.com/legal/trademarks>
+    2018 Canonical, Ltd. <https://ubuntu.com/legal/trademarks>
 License: LicenseRef-Canonical-Intellectual-Property-Rights-Policy
