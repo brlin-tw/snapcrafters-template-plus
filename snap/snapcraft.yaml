@@ -66,7 +66,7 @@ assumes:
 # Base runtime
 # The common runtime for the snap to run on, or `bare` for static linked applications
 # https://docs.snapcraft.io/snapcraft-top-level-metadata/8334#heading--base
-base: core20
+base: core22
 
 # Security confinement
 # Use `devmode` to getting started
@@ -106,16 +106,6 @@ parts:
     stage:
       - -bin/README.*
 
-  # Programs to modify the behavior of each step of the snapcraft
-  # lifecycles
-  scriptlets:
-    source: snap/local/scriptlets
-    plugin: dump
-    organize:
-      '*': scriptlets/
-    prime:
-      - -*
-
   # Stage snap for fixing the Glibc locales
   # https://forum.snapcraft.io/t/the-locales-launch-stage-snap/10296
   #locales-launch:
@@ -145,9 +135,6 @@ parts:
       # for patch-desktop-entries.*
       - patching
 
-      # for override-pull script
-      - scriptlets
-
     source: .
     #source-type:
     #source-branch:
@@ -160,7 +147,7 @@ parts:
 
       snapcraftctl pull
 
-      "${SNAPCRAFT_STAGE}"/scriptlets/main-adopt-info
+      "${CRAFT_PROJECT_DIR}/snap/local/scriptlets/main-adopt-info"
 
     plugin: dump
     organize:
@@ -174,7 +161,7 @@ parts:
 
       snapcraftctl prime
 
-      "${SNAPCRAFT_STAGE}"/patching/patch-desktop-entries.bash
+      "${CRAFT_PROJECT_DIR}/snap/local/patching/patch-desktop-entries.bash"
 
 # Apps that are exposed by the snap package
 # If the _app_name_ is identical with the _snap_name_ it can be directly
@@ -183,10 +170,6 @@ parts:
 # `snap run _snap_name_._app_name_`
 apps:
   my-awesome-app:
-    # The adapter to set up runtime environment at the launch of the snap
-    # NOTE: The `command-chain` property is only supported by the `full` adapter
-    adapter: full
-
     # An *relative path* to an executable file root from the `prime`
     # directory to be executed, and its command-line arguments
     # NOTE: The right angle bracket at the beginning of the value of the
@@ -208,7 +191,18 @@ apps:
 
     # Snapcraft extensions that help building certain snaps
     extensions:
-      - gnome-3-38
+      - gnome
+
+lint:
+  ignore:
+    - library:
+        - '**/libGDK-*.so*'
+        - '**/libgdk_pixbuf-*.so*'
+        - '**/libgtk-*.so*'
+        - '**/libnotify.so*'
+        - '**/libpango-*.so*'
+        - '**/libwebkit2gtk-*.so*'
+        - '**/libX11*.so*'
 
 # Refer the following documentation for asserting interface plugs and
 # slots in a security confined snap:
