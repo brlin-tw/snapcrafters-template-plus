@@ -66,7 +66,7 @@ assumes:
 # Base runtime
 # The common runtime for the snap to run on, or `bare` for static linked applications
 # https://docs.snapcraft.io/snapcraft-top-level-metadata/8334#heading--base
-base: core22
+base: core24
 
 # Security confinement
 # Use `devmode` to getting started
