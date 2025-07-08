@@ -145,7 +145,7 @@ parts:
     override-pull: |
       set -o nounset
 
-      snapcraftctl pull
+      craftctl default
 
       "${CRAFT_PROJECT_DIR}/snap/local/scriptlets/main-adopt-info"
 
@@ -159,7 +159,7 @@ parts:
       set \
         -o nounset
 
-      snapcraftctl prime
+      craftctl default
 
       "${CRAFT_PROJECT_DIR}/snap/local/patching/patch-desktop-entries.bash"
 

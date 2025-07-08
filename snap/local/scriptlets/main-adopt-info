@@ -23,7 +23,7 @@ init(){
             --debug)
                 set -o xtrace
             ;;
-            # Don't run snapcraftctl for testing purpose
+            # Don't run craftctl for testing purpose
             --dry-run)
                 flag_dry_run=true
             ;;
@@ -56,7 +56,7 @@ init(){
 
     packaging_revision="$(
         git \
-            -C "${SNAPCRAFT_PROJECT_DIR}" \
+            -C "${CRAFT_PROJECT_DIR}" \
             describe \
             --abbrev=4 \
             --always \
@@ -70,8 +70,7 @@ init(){
         'main-adopt-info: Setting snap version to "%s".\n' \
         "${snap_version_string}"
     if [ "${flag_dry_run}" = false ]; then
-        snapcraftctl set-version \
-            "${snap_version_string}"
+        craftctl set version="${snap_version_string}"
     fi
 
     exit 0
