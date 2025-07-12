@@ -241,5 +241,3 @@ lint:
     #interface: system-files
     #read:
       #- /etc/my-awesome-app
-
-#slots:
