@@ -238,5 +238,3 @@ apps:
     #interface: system-files
     #read:
       #- /etc/my-awesome-app
-
-#slots:
