@@ -202,7 +202,7 @@ apps:
     extensions:
       - gnome
 
-    plugs:
+    plugs: []
       # Regular files access
       #- home
       #- removable-media # Non-A/C
