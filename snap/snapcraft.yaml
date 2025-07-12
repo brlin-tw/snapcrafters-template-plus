@@ -211,13 +211,6 @@ apps:
       - gnome-3-38
 
     plugs:
-      # Common desktop interfaces
-      # https://forum.snapcraft.io/t/the-desktop-interfaces/2042
-      - desktop
-      - desktop-legacy
-      - unity7
-      - wayland
-
       # Regular files access
       #- home
       #- removable-media # Non-A/C
