@@ -4,11 +4,18 @@
 # Copyright 2019 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
 # SPDX-License-Identifier: MIT
 
-set \
-    -o errexit \
-    -o errtrace \
-    -o nounset \
+set_opts=(
+    -o errexit
+    -o errtrace
+    -o nounset
     -o pipefail
+)
+if ! set "${set_opts[@]}"; then
+    printf -- \
+        'main-adopt-info: Error: Unable to set the defensive interpreter behaviors.\n' \
+        >&2
+    exit 1
+fi
 
 init(){
     local \
