@@ -210,7 +210,7 @@ apps:
     extensions:
       - gnome-3-38
 
-    plugs:
+    plugs: []
       # Regular files access
       #- home
       #- removable-media # Non-A/C
