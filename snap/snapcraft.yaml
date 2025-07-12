@@ -202,6 +202,21 @@ apps:
     extensions:
       - gnome
 
+    plugs:
+      # Common desktop interfaces
+      # https://forum.snapcraft.io/t/the-desktop-interfaces/2042
+      - desktop
+      - desktop-legacy
+      - unity7
+      - wayland
+
+      # Regular files access
+      #- home
+      #- removable-media # Non-A/C
+
+      # Network access
+      #- network
+
 lint:
   ignore:
     - library:
@@ -221,17 +236,6 @@ lint:
 # https://docs.snapcraft.io/supported-interfaces/7744
 # Non-A/C: Non-autoconnect interface
 #plugs:
-  # Common desktop interfaces
-  # https://forum.snapcraft.io/t/the-desktop-interfaces/2042
-  #desktop:
-  #desktop-legacy:
-  #unity7:
-  #wayland:
-
-  # Regular files access
-  #home:
-  #removable-media: # Non-A/C
-
   # Application-specific files access
   # The auto-connection requires store grant
   # https://forum.snapcraft.io/t/the-personal-files-interface/9357
@@ -244,8 +248,5 @@ lint:
     #interface: system-files
     #read:
       #- /etc/my-awesome-app
-
-  # Network access
-  #network:
 
 #slots:
